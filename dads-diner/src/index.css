@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.title{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 100%;
+  border-bottom: .1em solid lightsteelblue;
+}
+
+.title.big-title{
+  font-size: 150%;
+  border-bottom: .2em solid lightslategray;
+}
+
+.spaced-span{
+  padding-right: .6em;
+}
+
+.menu-component{
+  border: 1px solid rgb(75, 221, 7);
+  margin: 0.5em;
+}
+.course-component{
+  border: 1px solid rgb(245, 35, 8);
+  margin: 0.5em;
+}
+.item-component{
+  border: 1px solid rgb(0, 0, 0);
+  margin: 0.5em;
+}
+.selected-items{
+  border: 1px solid rgb(120, 16, 187);
+  margin: 0.5em;
+}
