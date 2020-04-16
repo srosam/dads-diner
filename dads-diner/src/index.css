@@ -27,8 +27,17 @@ code {
   padding-right: .6em;
 }
 
+.app-component{
+  /* border: 2px solid rgb(75, 100, 255); */
+  margin: 0.5em;
+}
 .menu-component{
-  border: 1px solid rgb(75, 221, 7);
+  /* border: 1px solid rgb(75, 221, 7); */
+  margin: 0.5em;
+  background-color: rgb(236, 207, 145);
+}
+.section-component{
+  border: 2px solid rgb(155, 60, 120);
   margin: 0.5em;
 }
 .course-component{
@@ -36,7 +45,7 @@ code {
   margin: 0.5em;
 }
 .item-component{
-  border: 1px solid rgb(0, 0, 0);
+  /* border: 1px solid rgb(0, 0, 0); */
   margin: 0.5em;
 }
 .selected-items{

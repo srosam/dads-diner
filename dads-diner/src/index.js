@@ -1,9 +1,18 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+//import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { checkPropTypes } from 'prop-types';
+
+import { Box, Grommet } from 'grommet';
+
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import enGb from 'date-fns/locale/en-GB';
+registerLocale('en-GB', enGb)
 
 function itemData(){
   return [
@@ -21,106 +30,197 @@ function itemData(){
             {key: 31, name: 'Brandy'},
             {key: 41, name: 'Turkey'},
             {key: 51, name: 'Ham'},
-            {key: 61, name: 'Beef'}
+            {key: 61, name: 'Beef'},
+            {key: 42, name: 'Chips'},
+            {key: 52, name: 'Potato Waffles'},
+            {key: 62, name: 'Beans'},
+            {key: 43, name: 'Peas'},
+            {key: 53, name: 'Green Beans'},
+            {key: 63, name: 'Cauliflower'},
   ];
 }
 
-function getData(index){
+function getData(){
   
-
   let data = [
     {
-      date: '2001-12-22',
+      date: '2020-04-18',
       courses: [
         {
           key: 0,
-          name: 'Starter',
+          //name: 'Starter',
           required: false,
           minimum: 0,
           maximum: 1,
-          items: [
-            {key: 10, name: 'Soup'},
-            {key: 20, name: 'Sardines'},
-            {key: 30, name: 'Garlic bread'},
+          sections: [
+            { 
+              key: 0, name: "Starter", 
+              items: [
+                {key: 40, name: 'Battered Cod'},
+                {key: 50, name: 'Lasagne'},
+                {key: 60, name: 'Burrito'},
+              ]
+            }
           ]
+          // ,
+          // items: [
+          //   {key: 10, name: 'Soup'},
+          //   {key: 20, name: 'Sardines'},
+          //   {key: 30, name: 'Garlic bread'},
+          // ]
         },
         {
           key: 1,
-          name: 'Main',
+          //name: 'Main',
           required: true,
           minimum: 1,
           maximum: 1,
-          items: [
-            {key: 40, name: 'Battered Cod'},
-            {key: 50, name: 'Lasagne'},
-            {key: 60, name: 'Burrito'},
+          sections: [
+            { 
+              key: 1, name: "Mains", 
+              items: [
+                {key: 40, name: 'Battered Cod'},
+                {key: 50, name: 'Lasagne'},
+                {key: 60, name: 'Burrito'},
+              ]
+            },
+            { 
+              key: 2, name: "Sides", 
+              items: [
+                {key: 42, name: 'Chips'},
+                {key: 52, name: 'Potato Waffles'},
+                {key: 62, name: 'Beans'},
+              ]
+            },
+            { 
+              key: 3, name: "Veggies", 
+              items: [
+                {key: 43, name: 'Peas'},
+                {key: 53, name: 'Green Beans'},
+                {key: 63, name: 'Cauliflower'},
+              ]
+            }
           ]
+          // ,
+          // items: [
+          //   {key: 40, name: 'Battered Cod'},
+          //   {key: 50, name: 'Lasagne'},
+          //   {key: 60, name: 'Burrito'},
+          // ]
         },
         {
           key: 2,
-          name: 'Pudding',
+          //name: 'Pudding',
           required: false,
           minimum: 0,
           maximum: 1,
-          items: [
-            {key: 70, name: 'Bread and butter pudding'},
-            {key: 80, name: 'Ice cream'},
-            {key: 90, name: 'Jelly'},
+          sections:[
+            { 
+              key: 1, name: "Puddings", 
+              items: [
+                {key: 70, name: 'Bread and butter pudding'},
+                {key: 80, name: 'Ice cream'},
+                {key: 90, name: 'Jelly'},
+              ]
+            }
           ]
         }
       ]
     },
     {
-      date: '2001-12-25',
+      date: '2020-04-16',
       courses: [
         {
           key: 0,
-          name: 'Starter',
+          //name: 'Starter',
           required: false,
           minimum: 0,
           maximum: 1,
-          items: [
-            {key: 11, name: 'Prawns and Salmon'},
-            {key: 21, name: 'Christmas Soup'},
-            {key: 31, name: 'Brandy'},
+          sections: [
+            { 
+              key: 0, name: "aaaaaaaaaaa", 
+              items: [
+                {key: 40, name: 'hgfhfh Cod'},
+                {key: 50, name: 'Lasadfhhgdgne'},
+                {key: 60, name: 'Burrdfdhito'},
+              ]
+            }
           ]
+          // ,
+          // items: [
+          //   {key: 10, name: 'Soup'},
+          //   {key: 20, name: 'Sardines'},
+          //   {key: 30, name: 'Garlic bread'},
+          // ]
         },
         {
           key: 1,
-          name: 'Main',
+          //name: 'Main',
           required: true,
           minimum: 1,
           maximum: 1,
-          items: [
-            {key: 41, name: 'Turkey'},
-            {key: 51, name: 'Ham'},
-            {key: 61, name: 'Beef'},
+          sections: [
+            { 
+              key: 1, name: "dfdhg", 
+              items: [
+                {key: 40, name: 'dghgd Cod'},
+                {key: 50, name: 'Lasadgdhggne'},
+                {key: 60, name: 'fddhg'},
+              ]
+            },
+            { 
+              key: 2, name: "gfd", 
+              items: [
+                {key: 42, name: 'dhdhg'},
+                {key: 52, name: 'dgfdhg Waffles'},
+                {key: 62, name: 'gfdgd'},
+              ]
+            },
+            { 
+              key: 3, name: "dd", 
+              items: [
+                {key: 43, name: 'hh'},
+                {key: 53, name: 'gg Beans'},
+                {key: 63, name: 'nn'},
+              ]
+            }
           ]
+          // ,
+          // items: [
+          //   {key: 40, name: 'Battered Cod'},
+          //   {key: 50, name: 'Lasagne'},
+          //   {key: 60, name: 'Burrito'},
+          // ]
         },
         {
           key: 2,
-          name: 'Pudding',
+          //name: 'Pudding',
           required: false,
           minimum: 0,
           maximum: 1,
-          items: [
-            {key: 70, name: 'Bread and butter pudding'},
-            {key: 80, name: 'Ice cream'},
-            {key: 90, name: 'Jelly'},
+          sections:[
+            { 
+              key: 1, name: "Puddings", 
+              items: [
+                {key: 70, name: 'Bread and butter pudding'},
+                {key: 80, name: 'Ice cream'},
+                {key: 90, name: 'Jelly'},
+              ]
+            }
           ]
         }
       ]
-    }
+    },
   ];
 
-  return data[index];
+  return data;
 }
 
 function Item(props){
   const [checked, setChecked] = useState(false);
   return(
     <div className="item-component">
-      <span>{props.itemData.key} - </span>
+      <span>Item #{props.itemData.key} </span>
       <span>{props.itemData.name}</span>
       <input type="checkbox" 
           checked={checked} 
@@ -135,54 +235,75 @@ function Item(props){
   );
 }
 
-function Course(props){
+function CourseSection(props){
 
-  const courseItems = props.courseData.items.map(
+  const sectionItems = props.me.items.map(
     (i) => <Item 
               key={i.key} 
               itemData={i}
               itemChecked={props.itemChecked}
               ></Item>);
 
-  return(
+  return (
+    <div className="section-component"
+      style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}
+    >
+      <span>CourseSection #{props.me.key} </span>
+      <span className="title">{props.me.name}</span>
+      {sectionItems}
+  </div>
+  );
+}
+
+function Course(props){
+
+    const sections = props.courseData.sections.map(
+      (i) => <CourseSection
+            key={i.key} 
+            me={i}
+            ></CourseSection>);
+
+return(
     <div className="course-component">
-      <span>{props.courseData.key} - </span>
+      <span>Course Container #{props.courseData.key}</span>
       <span className="title">{props.courseData.name}</span>
-      {courseItems}
+      <Box direction="row" width="large" animation="fadeIn">
+        {sections}
+      </Box>
     </div>
   );
 }
 
 function Menu(props){
 
-  let data = getData(0);
   let items = itemData();
 
-  const [checked, setChecked] = useState([]);
-  const [name, setName] = useState("Robert");
+  const [selectedKeys, setChecked] = useState([]);
 
   const handleChecked = (key) => {
-    if(checked.includes(key)){
-      checked.splice(checked.indexOf(key), 1);
-      setChecked(checked => [...checked]);
+    if(selectedKeys.includes(key)){
+      selectedKeys.splice(selectedKeys.indexOf(key), 1);
+      setChecked(selectedKeys => [...selectedKeys]);
     }
     else{
-      setChecked(checked => [...checked, key]);
+      setChecked(selectedKeys => [...selectedKeys, key]);
     }
   }
 
-  const checkedItems = checked.map(
-    (i) => (<div><span 
-              key={i} 
-              className="spaced-span">
-                { items.find(e => e.key == i).name }
+  const checkedItems = selectedKeys.map(
+    (i) => (
+            <div>
+              <span 
+                key={i} 
+                className="spaced-span">
+                  { items.find(e => e.key == i).name }
               </span>
               <br/>
-              </div>
+            </div>
           )
     );
 
-  const courses = data.courses.map(
+  const courses = props.menuData.courses.map(
     (i) => <Course 
               key={i.key} 
               courseData={i}
@@ -191,7 +312,7 @@ function Menu(props){
 
   return (
     <div className="menu-component">
-      <span className="title big-title">Menu for {data.date}</span>
+      <span className="title big-title">Menu for {props.menuData.date}</span>
       {courses}
       <div className="selected-items">
         <span className="title">Selected Menu Items</span><br/>
@@ -200,9 +321,58 @@ function Menu(props){
   );
 }
 
+function App(props){
+
+  const [menuDate, setDate] = useState(Date.now); //ms since 1970-01-01
+  const [selectedMenu, setSelectedMenu] = useState(getData()[0]);
+
+  let data2 = getData()[1];
+
+  function getTicksSince1970(d){
+    let date = new Date(d);
+    date.setHours(12,0,0,0);
+    return date.getTime();
+  }
+
+  const handleDateChanged = (x) => {
+
+    let newDate = getTicksSince1970(x);
+    
+    let foundMenu = data.find(function(d){
+      return getTicksSince1970(d.date) == newDate;
+    })
+
+    if(foundMenu){
+      setSelectedMenu(foundMenu);
+    }
+
+    setDate(newDate);
+  }
+
+  let data = getData();
+
+  return(
+    <div className="app-component">
+      <Box direction="row">
+
+        <DatePicker
+            selected={new Date(menuDate)}
+            onChange={handleDateChanged}
+            dateFormat="yyyy-MM-dd"
+            />
+
+        <input type="button" value="Login"></input>
+
+      </Box>
+    
+      <Menu menuData={selectedMenu}/>
+    </div>
+  );
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <Menu />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
