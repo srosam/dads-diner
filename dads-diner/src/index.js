@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 //import App from './App';
@@ -12,6 +12,9 @@ import "react-datepicker/dist/react-datepicker.css"
 
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import enGb from 'date-fns/locale/en-GB';
+
+import cx from "classnames";
+
 registerLocale('en-GB', enGb)
 
 function itemData(){
@@ -48,13 +51,12 @@ function getData(){
       courses: [
         {
           key: 0,
-          //name: 'Starter',
-          required: false,
-          minimum: 0,
-          maximum: 1,
           sections: [
             { 
               key: 0, name: "Starter", 
+              required: false,
+              minimum: 0,
+              maximum: 1,
               items: [
                 {key: 40, name: 'Battered Cod'},
                 {key: 50, name: 'Lasagne'},
@@ -62,22 +64,15 @@ function getData(){
               ]
             }
           ]
-          // ,
-          // items: [
-          //   {key: 10, name: 'Soup'},
-          //   {key: 20, name: 'Sardines'},
-          //   {key: 30, name: 'Garlic bread'},
-          // ]
         },
         {
           key: 1,
-          //name: 'Main',
-          required: true,
-          minimum: 1,
-          maximum: 1,
           sections: [
             { 
               key: 1, name: "Mains", 
+              required: true,
+              minimum: 0,
+              maximum: 1,
               items: [
                 {key: 40, name: 'Battered Cod'},
                 {key: 50, name: 'Lasagne'},
@@ -86,6 +81,9 @@ function getData(){
             },
             { 
               key: 2, name: "Sides", 
+              required: false,
+              minimum: 0,
+              maximum: 2,
               items: [
                 {key: 42, name: 'Chips'},
                 {key: 52, name: 'Potato Waffles'},
@@ -94,6 +92,9 @@ function getData(){
             },
             { 
               key: 3, name: "Veggies", 
+              required: true,
+              minimum: 1,
+              maximum: 3,
               items: [
                 {key: 43, name: 'Peas'},
                 {key: 53, name: 'Green Beans'},
@@ -101,22 +102,15 @@ function getData(){
               ]
             }
           ]
-          // ,
-          // items: [
-          //   {key: 40, name: 'Battered Cod'},
-          //   {key: 50, name: 'Lasagne'},
-          //   {key: 60, name: 'Burrito'},
-          // ]
         },
         {
           key: 2,
-          //name: 'Pudding',
-          required: false,
-          minimum: 0,
-          maximum: 1,
           sections:[
             { 
-              key: 1, name: "Puddings", 
+              key: 4, name: "Puddings", 
+              required: false,
+              minimum: 0,
+              maximum: 1,
               items: [
                 {key: 70, name: 'Bread and butter pudding'},
                 {key: 80, name: 'Ice cream'},
@@ -132,13 +126,12 @@ function getData(){
       courses: [
         {
           key: 0,
-          //name: 'Starter',
-          required: false,
-          minimum: 0,
-          maximum: 1,
           sections: [
             { 
-              key: 0, name: "aaaaaaaaaaa", 
+              key: 5, name: "aaaaaaaaaaa", 
+              required: false,
+              minimum: 0,
+              maximum: 1,
               items: [
                 {key: 40, name: 'hgfhfh Cod'},
                 {key: 50, name: 'Lasadfhhgdgne'},
@@ -146,22 +139,15 @@ function getData(){
               ]
             }
           ]
-          // ,
-          // items: [
-          //   {key: 10, name: 'Soup'},
-          //   {key: 20, name: 'Sardines'},
-          //   {key: 30, name: 'Garlic bread'},
-          // ]
         },
         {
           key: 1,
-          //name: 'Main',
-          required: true,
-          minimum: 1,
-          maximum: 1,
           sections: [
             { 
-              key: 1, name: "dfdhg", 
+              key: 6, name: "dfdhg", 
+              required: false,
+              minimum: 0,
+              maximum: 1,
               items: [
                 {key: 40, name: 'dghgd Cod'},
                 {key: 50, name: 'Lasadgdhggne'},
@@ -169,7 +155,10 @@ function getData(){
               ]
             },
             { 
-              key: 2, name: "gfd", 
+              key: 7, name: "gfd", 
+              required: false,
+              minimum: 0,
+              maximum: 1,
               items: [
                 {key: 42, name: 'dhdhg'},
                 {key: 52, name: 'dgfdhg Waffles'},
@@ -177,7 +166,10 @@ function getData(){
               ]
             },
             { 
-              key: 3, name: "dd", 
+              key: 8, name: "dd", 
+              required: false,
+              minimum: 0,
+              maximum: 1,
               items: [
                 {key: 43, name: 'hh'},
                 {key: 53, name: 'gg Beans'},
@@ -185,22 +177,15 @@ function getData(){
               ]
             }
           ]
-          // ,
-          // items: [
-          //   {key: 40, name: 'Battered Cod'},
-          //   {key: 50, name: 'Lasagne'},
-          //   {key: 60, name: 'Burrito'},
-          // ]
         },
         {
           key: 2,
-          //name: 'Pudding',
-          required: false,
-          minimum: 0,
-          maximum: 1,
           sections:[
             { 
-              key: 1, name: "Puddings", 
+              key: 9, name: "Puddings", 
+              required: false,
+              minimum: 0,
+              maximum: 1,
               items: [
                 {key: 70, name: 'Bread and butter pudding'},
                 {key: 80, name: 'Ice cream'},
@@ -217,17 +202,17 @@ function getData(){
 }
 
 function Item(props){
-  const [checked, setChecked] = useState(false);
+  const [isChecked, setChecked] = useState(false);
   return(
     <div className="item-component">
       <span>Item #{props.itemData.key} </span>
       <span>{props.itemData.name}</span>
       <input type="checkbox" 
-          checked={checked} 
+          checked={isChecked} 
           onChange={
             (event)=>{
-              setChecked(!checked);
-              props.itemChecked(props.itemData.key);
+              setChecked(!isChecked);
+              props.itemChanged(props.itemData.key, !isChecked);
             }
           } 
         ></input>
@@ -237,21 +222,66 @@ function Item(props){
 
 function CourseSection(props){
 
-  const sectionItems = props.me.items.map(
+  const [selectedCount, setSelectedCount] = useState(0);
+  const [valid, setValidity] = useState(false);
+
+  //do we need effects for these??
+  useEffect(() =>{
+    validateSelectedCount(selectedCount);
+  }, [selectedCount])
+
+  useEffect(() => {
+    props.validityChanged(props.item.key, valid);
+  }, [valid])
+
+  const setErrors = () => {
+    //props.errorsFound(props.item.)
+  };
+
+  const validateSelectedCount = (count) => {
+    let requiredIsValid = !props.item.required || count > 0;
+    let minIsValid = count >= props.item.minimum;
+    let maxIsValid = count <= props.item.maximum;
+    let isValid = requiredIsValid && minIsValid && maxIsValid;
+
+    setValidity(isValid);
+    if(!isValid){
+      setErrors()
+    }
+  }
+
+  const itemChanged = (x, checked) => {
+    setSelectedCount(selectedCount + (checked ? 1 : -1));
+    props.itemChanged(x, checked);
+  }
+
+  const sectionItems = props.item.items.map(
     (i) => <Item 
               key={i.key} 
               itemData={i}
-              itemChecked={props.itemChecked}
+              itemChanged={itemChanged}
               ></Item>);
 
   return (
-    <div className="section-component"
+
+    <div className={cx(
+        "section-component",{
+        "invalid": !valid,
+        "valid": valid
+        }
+      )}
       style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}
     >
-      <span>CourseSection #{props.me.key} </span>
-      <span className="title">{props.me.name}</span>
+      <span>CourseSection #{props.item.key} </span>
+      <span className="title">{props.item.name}</span>
       {sectionItems}
-  </div>
+      {props.debug && 
+        <div className="debug-info">
+        <span>DebugInfo:</span>
+        <div>Selected items={selectedCount}</div>
+        <div>Selection is Valid={valid?"Valid":"NOT Valid"}</div>
+        </div>}
+    </div>
   );
 }
 
@@ -260,7 +290,10 @@ function Course(props){
     const sections = props.courseData.sections.map(
       (i) => <CourseSection
             key={i.key} 
-            me={i}
+            item={i}
+            itemChanged={props.itemChanged}
+            validityChanged={props.validityChanged}
+            debug={props.debug}
             ></CourseSection>);
 
 return(
@@ -279,15 +312,93 @@ function Menu(props){
   let items = itemData();
 
   const [selectedKeys, setChecked] = useState([]);
+  const [sectionValidity, setSectionValidity] = useState([]);
+  const [valid, setValidity] = useState(false);
+  const [sectionIssues, setSectionIssues] = useState([]);
 
-  const handleChecked = (key) => {
-    if(selectedKeys.includes(key)){
+  useEffect(() =>{
+    //console.log("Valid");
+  }, [valid === true])
+
+  const handleChangd = (key, checked) => {
+
+    if(!checked){ //remove it
       selectedKeys.splice(selectedKeys.indexOf(key), 1);
       setChecked(selectedKeys => [...selectedKeys]);
     }
-    else{
+    else{ //add it
       setChecked(selectedKeys => [...selectedKeys, key]);
     }
+  }
+
+  const determineSectionIssues = (sectionKey, isValid) => {
+
+    console.log(sectionKey);
+  
+    let sectionIssuesIndex = sectionIssues.indexOf(sectionIssues
+      .find(i => i.sectionKey === sectionKey));
+
+    if(isValid) { //remove issues from list
+
+      sectionIssues.splice(sectionIssuesIndex, 1);
+      setSectionIssues(setSectionIssues => [...sectionIssues]);
+
+    }
+    else{
+      //let invalidSection = sectionValidity.find(i => i.sectionKey === sectionKey)
+
+      //one way to do this is to dig into the data and find the relevant constraints
+
+      let foundCourse = props.menuData.courses.find(
+              (c) => c.sections.find((s) => s.key == sectionKey));
+
+      let foundSection = foundCourse.sections.find(
+                (s) => s.key == sectionKey);
+
+      let issuesText = foundSection.name 
+                    + " must have between " 
+                    + foundSection.minimum 
+                    + " and " 
+                    + foundSection.maximum 
+                    + " selections";
+    
+      //find the item we want to alter
+      // let index = sectionIssues.indexOf(sectionIssues
+      //   .find(i => i.sectionKey === sectionKey));
+
+      //if its not present, add it.
+      //if it is, remove it and add in a replacement
+      if(sectionIssuesIndex < 0){
+        setSectionIssues(sectionIssues => 
+            [...sectionIssues, { sectionKey: sectionKey, issues: issuesText}]);
+      }else{
+        sectionIssues.splice(sectionIssuesIndex, 1, 
+            { sectionKey: sectionKey, issues: issuesText});
+      }
+    }
+  }
+
+  const handleValidityChanged = (sectionKey, isValid) => {
+
+    //find the item we want to alter
+    let sectionKeyIndex = sectionValidity.indexOf(sectionValidity
+                            .find(i => i.sectionKey === sectionKey));
+    
+    //if its not present, add it.
+    //if it is, remove it and add in a replacement
+    if(sectionKeyIndex < 0){
+      setSectionValidity(sectionValidity => 
+          [...sectionValidity, { sectionKey: sectionKey, valid: isValid}]);
+    }else{
+      sectionValidity.splice(sectionKeyIndex, 1, 
+          { sectionKey: sectionKey, valid: isValid});
+    }
+
+    let allValid = sectionValidity.find(v => v.valid === false) === undefined; //not found
+    setValidity(allValid);
+
+    determineSectionIssues(sectionKey, isValid);
+
   }
 
   const checkedItems = selectedKeys.map(
@@ -296,7 +407,7 @@ function Menu(props){
               <span 
                 key={i} 
                 className="spaced-span">
-                  { items.find(e => e.key == i).name }
+                  { items.find(e => e.key === i).name }
               </span>
               <br/>
             </div>
@@ -307,16 +418,33 @@ function Menu(props){
     (i) => <Course 
               key={i.key} 
               courseData={i}
-              itemChecked={handleChecked}
+              itemChanged={handleChangd}
+              validityChanged={handleValidityChanged}
+              debug={props.debug}
               ></Course>);
 
   return (
     <div className="menu-component">
       <span className="title big-title">Menu for {props.menuData.date}</span>
-      {courses}
+      <div>{courses}</div>
+      <div>        
+        <input type="button" value="Submit Choices" disabled={!valid} className={cx("app-button", {"green": valid})} />
+        {!valid && 
+        <div className="error-info">
+          <div>Ensure all sections are green</div>
+          {sectionIssues.map((i) => {return <div key={i.sectionKey}>{i.issues}</div>})}
+        </div>}
+      </div>
+
       <div className="selected-items">
         <span className="title">Selected Menu Items</span><br/>
         {checkedItems}</div>
+
+        {props.debug && 
+        <div className="debug-info">
+        <span>DebugInfo:</span>
+        <div>Menu selections are Valid={valid?"Valid":"NOT Valid"}</div>
+        </div>}
     </div>
   );
 }
@@ -326,7 +454,8 @@ function App(props){
   const [menuDate, setDate] = useState(Date.now); //ms since 1970-01-01
   const [selectedMenu, setSelectedMenu] = useState(getData()[0]);
 
-  let data2 = getData()[1];
+  //find closest menu to todays date as default?
+  //or say no next menu found?
 
   function getTicksSince1970(d){
     let date = new Date(d);
@@ -334,18 +463,18 @@ function App(props){
     return date.getTime();
   }
 
-  const handleDateChanged = (x) => {
-
-    let newDate = getTicksSince1970(x);
-    
-    let foundMenu = data.find(function(d){
-      return getTicksSince1970(d.date) == newDate;
+  function findMenuByDate(input){
+    return data.find(function(d){
+      return getTicksSince1970(d.date) == input;
     })
+  }
 
+  const handleDateChanged = (selectedDateString) => {
+    let newDate = getTicksSince1970(selectedDateString);
+    let foundMenu = findMenuByDate(newDate);
     if(foundMenu){
       setSelectedMenu(foundMenu);
     }
-
     setDate(newDate);
   }
 
@@ -365,14 +494,17 @@ function App(props){
 
       </Box>
     
-      <Menu menuData={selectedMenu}/>
+      <Menu 
+        menuData={selectedMenu}
+        debug={props.debug}
+      />
     </div>
   );
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App debug={true}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
