@@ -1,0 +1,14 @@
+.menu-component{
+    /* border: 1px solid rgb(75, 221, 7); */
+    margin: 0.5em;
+    background-color: rgb(236, 207, 145);
+  }
+
+  .selected-items{
+    border: 1px solid rgb(120, 16, 187);
+    margin: 0.5em;
+  }
+
+  .spaced-span{
+    padding-right: .6em;
+  }

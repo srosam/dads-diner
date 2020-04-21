@@ -1,0 +1,10 @@
+.section-component{
+    border: 2px solid rgb(155, 60, 120);
+    margin: 0.5em;
+  }
+  .section-component.valid{
+    background-color: green;
+  }
+  .section-component.invalid{
+    background-color: red;
+  }
