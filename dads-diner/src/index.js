@@ -1,3 +1,28 @@
+/*
+TODO
+
+any selections, warn on date change
+clear if accepting
+
+build json payload to submit
+include menu date, submit date, selected items
+
+maybe change where the item id's are found from. i.e. not a seperate dataset
+
+//refactor the code
+split out into seperate classes and creat ehelpers where needed
+
+//phase 2 
+create backend to pull the data in from (graphql thing)
+
+//phase 3
+allow save for later
+load saved for later
+
+
+*/
+
+
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -40,6 +65,12 @@ function itemData(){
             {key: 43, name: 'Peas'},
             {key: 53, name: 'Green Beans'},
             {key: 63, name: 'Cauliflower'},
+            {key: 110, name: 'Long island iced tea'},
+            {key: 120, name: 'Juice'},
+            {key: 130, name: 'Water'},
+            {key: 111, name: 'Brie'},
+            {key: 121, name: 'Cheddar'},
+            {key: 131, name: 'Edam'},
   ];
 }
 
@@ -50,26 +81,26 @@ function getData(){
       date: '2020-04-18',
       courses: [
         {
-          key: 0,
+          key: 1000,
           sections: [
             { 
-              key: 0, name: "Starter", 
+              key: 2000, name: "Starter", 
               required: false,
               minimum: 0,
               maximum: 1,
               items: [
-                {key: 40, name: 'Battered Cod'},
-                {key: 50, name: 'Lasagne'},
-                {key: 60, name: 'Burrito'},
+                {key: 10, name: 'Soup'},
+                {key: 20, name: 'Sardines'},
+                {key: 30, name: 'Garlic bread'},
               ]
             }
           ]
         },
         {
-          key: 1,
+          key: 3000,
           sections: [
             { 
-              key: 1, name: "Mains", 
+              key: 4000, name: "Mains", 
               required: true,
               minimum: 0,
               maximum: 1,
@@ -80,7 +111,7 @@ function getData(){
               ]
             },
             { 
-              key: 2, name: "Sides", 
+              key: 5000, name: "Sides", 
               required: false,
               minimum: 0,
               maximum: 2,
@@ -91,7 +122,7 @@ function getData(){
               ]
             },
             { 
-              key: 3, name: "Veggies", 
+              key: 6000, name: "Veggies", 
               required: true,
               minimum: 1,
               maximum: 3,
@@ -104,10 +135,10 @@ function getData(){
           ]
         },
         {
-          key: 2,
+          key: 7000,
           sections:[
             { 
-              key: 4, name: "Puddings", 
+              key: 8000, name: "Puddings", 
               required: false,
               minimum: 0,
               maximum: 1,
@@ -119,83 +150,41 @@ function getData(){
             }
           ]
         }
-      ]
-    },
-    {
-      date: '2020-04-16',
-      courses: [
+        ,
         {
-          key: 0,
-          sections: [
-            { 
-              key: 5, name: "aaaaaaaaaaa", 
-              required: false,
-              minimum: 0,
-              maximum: 1,
-              items: [
-                {key: 40, name: 'hgfhfh Cod'},
-                {key: 50, name: 'Lasadfhhgdgne'},
-                {key: 60, name: 'Burrdfdhito'},
-              ]
-            }
-          ]
-        },
-        {
-          key: 1,
-          sections: [
-            { 
-              key: 6, name: "dfdhg", 
-              required: false,
-              minimum: 0,
-              maximum: 1,
-              items: [
-                {key: 40, name: 'dghgd Cod'},
-                {key: 50, name: 'Lasadgdhggne'},
-                {key: 60, name: 'fddhg'},
-              ]
-            },
-            { 
-              key: 7, name: "gfd", 
-              required: false,
-              minimum: 0,
-              maximum: 1,
-              items: [
-                {key: 42, name: 'dhdhg'},
-                {key: 52, name: 'dgfdhg Waffles'},
-                {key: 62, name: 'gfdgd'},
-              ]
-            },
-            { 
-              key: 8, name: "dd", 
-              required: false,
-              minimum: 0,
-              maximum: 1,
-              items: [
-                {key: 43, name: 'hh'},
-                {key: 53, name: 'gg Beans'},
-                {key: 63, name: 'nn'},
-              ]
-            }
-          ]
-        },
-        {
-          key: 2,
+          key: 9000,
           sections:[
             { 
-              key: 9, name: "Puddings", 
+              key: 5, name: "Drinks", 
               required: false,
               minimum: 0,
               maximum: 1,
               items: [
-                {key: 70, name: 'Bread and butter pudding'},
-                {key: 80, name: 'Ice cream'},
-                {key: 90, name: 'Jelly'},
+                {key: 110, name: 'Long island iced tea'},
+                {key: 120, name: 'Juice'},
+                {key: 130, name: 'Water'},
+              ]
+            }
+          ]
+        },
+        {
+          key: 10000,
+          sections:[
+            { 
+              key: 11000, name: "Cheeses", 
+              required: false,
+              minimum: 0,
+              maximum: 2,
+              items: [
+                {key: 111, name: 'Brie'},
+                {key: 121, name: 'Cheddar'},
+                {key: 131, name: 'Edam'},
               ]
             }
           ]
         }
       ]
-    },
+    }
   ];
 
   return data;
@@ -403,12 +392,10 @@ function Menu(props){
 
   const checkedItems = selectedKeys.map(
     (i) => (
-            <div>
-              <span 
+            <div
                 key={i} 
                 className="spaced-span">
                   { items.find(e => e.key === i).name }
-              </span>
               <br/>
             </div>
           )
@@ -504,7 +491,7 @@ function App(props){
 
 ReactDOM.render(
   <React.StrictMode>
-    <App debug={true}/>
+    <App debug={false}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
